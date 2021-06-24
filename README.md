@@ -5,11 +5,11 @@ Watch this project in action in this video:
 [![Youtube - Microcontroller ESP 32 Project: PI Control (photoresistor + LEDs) and Weather Station using a DHT11](https://img.youtube.com/vi/iLYnsSbcMas/mqdefault.jpg)](https://youtu.be/iLYnsSbcMas)
 
 This project started from my desire to refresh process control concepts, which are essential to a chemical engineer, in a practical hands-on approach way; and its conception
-was substantially influenced by the work done by at APmonitor.com and their [Temperature Control Lab](http://apmonitor.com/pdc/index.php/Main/ArduinoTemperatureControl). 
+was substantially influenced by the work done at APmonitor.com and their [Temperature Control Lab](http://apmonitor.com/pdc/index.php/Main/ArduinoTemperatureControl). 
 There are nevertheless some differences:
 1. Due to the lack of a suitable heat source to perform a temperature control loop, with the items I had available I decided to do a control system based on a photoresistor and
 several LEDs.
-2. The code was done using Arduino IDE, not Python.
+2. All programing was done using Arduino IDE, not Python.
 3. An ESP32 was used instead of an Arduino, in order to explore the intrinsic Webserver capabilities of this microcontroller. In fact, most of the workload was on the web pages.
 
 This is how it looks like:
@@ -17,8 +17,8 @@ This is how it looks like:
 ![PI Control & DHT](/data/PIControlS.jpg)
 
 This project assumes that you are already familiar with Arduino and the basic commands and sketches. Hence, the main novelty is based on the use of the ESP32. 
-This first thing to notice is which microcontroller you actually have. Notice that meanwhile there is the ['official' DevKit from Espressif](https://www.espressif.com/en/products/devkits/esp32-devkitc/overview),
-there are in fact many other DevKit, as you can find out in [esp32.net](http://esp32.net/). The one I purchased was in fact not an original one, unknowingly, but from another company
+The first thing to notice is which microcontroller you actually have. Notice that meanwhile there is the ['official' DevKit from Espressif](https://www.espressif.com/en/products/devkits/esp32-devkitc/overview),
+there are in fact many other DevKits, as shown in [esp32.net](http://esp32.net/). The one I purchased was in fact not an original one, unknowingly, but from another company
 called [GOOUUU](https://world.taobao.com/item/547075951035.htm). The only relevance that I could see was that the pin numbers may be different, mine are shown here: 
 [Pinlayout](https://img.alicdn.com/imgextra/i1/672934643/TB2r4JyixXkpuFjy0FiXXbUfFXa_!!672934643.jpg_760x760Q50s50.jpg_.webp).
 
@@ -35,10 +35,10 @@ and that they require 1-2 s, hence do not use short intervals. https://create.ar
 **2. Install the ESP32 into the Arduino IDE.**
 
 If it is the first time you use the ESP32, first you will have to decide how you will program it, as there are indeed quite a few ways to do it: from the official 
-Espressif IoT Development Framework (ESP-IDF), to MicroPython, or using the Arduino IDE with is based on C++. In this project I used the latter, as it is the most easy
+Espressif IoT Development Framework (ESP-IDF), to MicroPython, or using the Arduino IDE with is based on C++. In this project I used the latter, as it is the easyest
 for Arduino users.
 Find a suitable tutorial on how to install the ESP32 into the Arduino IDE, such as https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/.
-When all is done, you should likely select a "ESP32 Dev Module" as you board.
+When all is done, you should likely select the "ESP32 Dev Module" as you board.
 
 **3. Connect the ESP32 to your local Wifi network.**
 
@@ -74,7 +74,7 @@ int redpin = 12; // select the pin for the red LED
 int bluepin = 27; // select the pin for the blue LED
 int greenpin = 14 ;// select the pin for the green LED
 ```
-Notice that unlike with Arduino, additional PWM parameters have to be defined in the ESP32, as explained here https://randomnerdtutorials.com/esp32-pwm-arduino-ide/.
+Additional PWM parameters have to be defined in the ESP32, unlike with Arduino, as explained here https://randomnerdtutorials.com/esp32-pwm-arduino-ide/.
 
 **5. DHT sensor readings.**
 
@@ -117,7 +117,7 @@ and inside the setup()
 ```cpp
 configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 ```
-then, you can get the real time but calling this function:
+then, you can get the real time by calling this function:
 
 ```cpp
 void printLocalTime()
@@ -153,7 +153,7 @@ Serial.print("IP address: ");
 Serial.println(WiFi.localIP());
 ```
 In my case I would get something like this:  IP address: 192.168.1.103. If you copy & paste this IP address into a browser, you should see
-the ESP32 Webserver in action. Note, obviously, that your computer and the ESP32 must be connected to the same local network. If you have
+the ESP32 Webserver in action. Obviously, your computer and the ESP32 must be connected to the same local network. If you have
 selected you Webserver to be in port 8888, for example, then you would need to use in the browser: 192.168.1.103:8888.  
 An important aspect of the Webserver is how to handle HTTP requests - as you must code what the ESP32 should do whenever something is
 requested by a client, e.g. a browser. In the HelloServer example, the key line inside setup() is this:
@@ -173,10 +173,10 @@ In addition of switching on and off a LED, for fun, the key line is that in the 
 everything is good, a [success](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200). "text/plain" is the type of information to be sent,
 in this case plain text. Such descritption, called [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types),
 is very important because it tells the browser what the information being sent is: text, html, image, video, etc. The third argument of *server.send*
-is the information to send, in this example "hello from esp32!". In the future, it will be much more complicated.   
+is the information to send, in this example "hello from esp32!". In the future, it will be a bit more complicated.   
 Handling HTTP requests are a bit of a pain because everything that the Webserver (the ESP32) has to send to the client (e.g. browser) has
 to be defined in such way: first by specifying what is the HTTP request using *server.on*, and then by defining a handling function of what to do,
-likely finishing with a *server.send*(200, etc, etc).  Note the other example given in the example HelloServer; with would be activated if 
+likely finishing with a *server.send*(200, etc, etc). The other example given in the example HelloServer could be accessed by
 calling in the browser 192.168.1.103/inline.
 
 ```cpp
@@ -184,7 +184,7 @@ calling in the browser 192.168.1.103/inline.
     server.send(200, "text/plain", "this works as well");
   });
 ```
-Note that in the loop(), where usually the main code is located, is almost empty, it basically only has *server.handleClient()* for the
+Note that inside the loop(), where usually the main code is located, it is almost empty, it only has *server.handleClient()* for the
 Webserver to do its job every time a client (browser) connects to it. Hence, the loop() is available to do whatever else you want.
 ```cpp
 void loop(void) {
@@ -201,7 +201,7 @@ tutorial to have a simple Webserver controlling LEDs https://randomnerdtutorials
 run and it is useful to understand HTTP requests, its code is certainly cumbersome it was not used further on. 
 A similar example with nicer code is shown here https://lastminuteengineers.com/creating-esp32-web-server-arduino-ide/.
 
-In particular, it was not used because if you want to switch an LED ON, for example, and LED in pin 26 - this requires an address like: 192.168.1.103/26/on.
+These examples not used because if you want to switch an LED ON, for example, and LED in pin 26 - this requires an address like: 192.168.1.103/26/on.
 First, it is ugly, as everybody can see in their browser whatever is going on, and second, this will only work with simple information, e.g. on/off.
 
 These initial examples should be used to learn the basics of [HTML coding](https://www.w3schools.com/html/), and a little bit on [CSS styles](https://www.w3schools.com/css/default.asp).
@@ -216,9 +216,9 @@ certainly allows to display the DHT data online, as discussed [here](https://ran
 However, in another tutorial from the same team, doing a nice multiple sensors [weather station](https://randomnerdtutorials.com/build-an-all-in-one-esp32-weather-station-shield/), 
 such library was not used, and instead, the data was refreshed in the web page using AJAX.
 
-AJAX (Asynchronous JavaScript and XML) allows asynchronous communication  from the client side, and thus there was no need to use the 
+AJAX (Asynchronous JavaScript and XML) allows asynchronous communication from the client side, and thus there was no need to use the 
 ESPAsyncWebServer library - even if it may have other nice advantages that I havent yet explored. This was a key decision of the project.
-In addition, an [old project by David Bird](https://github.com/G6EJD/ESP32_Data_Logging_Webserver) convinced me that I could do all I wanted with the default webserver of the ESP32.
+In addition, an [old project by David Bird](https://github.com/G6EJD/ESP32_Data_Logging_Webserver) convinced me that I could do all I wanted with the default webserver library of the ESP32.
 
 Hence, the job is now to [learn how to use AJAX](https://www.w3schools.com/asp/asp_ajax_intro.asp) with the ESP32 to send information to a web page in a client. Briefly, AJAX uses a combination of:
 
@@ -228,8 +228,8 @@ Hence, the job is now to [learn how to use AJAX](https://www.w3schools.com/asp/a
 * XML (often used as the format for transferring data)
 
 I recommend first to do this tutorial: https://circuits4you.com/2018/11/20/web-server-on-esp32-how-to-update-and-display-sensor-values/,
-and then have a look on this one using the DHT sensor https://www.teachmemicro.com/sensor-display-on-esp32-web-server/. 
-One thing you will notice is that the HTML code for the webpage is now increasing substantially, as we are using JavaScript there. Hence,
+and then have a look at this one using the DHT sensor https://www.teachmemicro.com/sensor-display-on-esp32-web-server/. 
+One thing you will notice is that the HTML code for the webpage(s) is now increasing substantially, as we are using JavaScript there. Hence,
 it is not convenient to include the HTML code in the *.ino code, but it should be saved as an external file, e.g. *file.h*, with the following
 format:
 
@@ -243,14 +243,14 @@ const char MAIN_page[] PROGMEM = R"=====(
 ```
 A substantial amount of time will be required to improve such client-side HTML code. Let us see an example from the above [code](https://circuits4you.com/2018/11/20/web-server-on-esp32-how-to-update-and-display-sensor-values/) how AJAX works:
 In the webpage (client side), there is a [Span HTML tag](https://www.w3schools.com/tags/tag_span.asp) with *id="ADCValue"*. The value in this span
-element, which initially is 0, will be updated using AJAX and the new data from the sensor.
+element, which initially is 0, will be updated using AJAX with the new data from the sensor.
 
 ```cpp
 <h1>Sensor Value:<span id="ADCValue">0</span></h1><br>
 ```
 The Javascript code is the following. The top code simply specifies that every 2 s (given in milliseconds), the function *getData()* should be called.
 Such function makes an XMLHttpRequest (a key AJAX object), and will send *GET* request to the server, named *readADC*.
-Once the server replies and sends a value, the code will take the reply (*this.responseText*) and it will use it as HTML in the Spane
+Once the server replies and sends a value, the code will take the reply (*this.responseText*) and it will use it in the Span
 element with id="ADCValue" (*document.getElementById("ADCValue").innerHTML*).
 
 ```javascript
@@ -274,11 +274,11 @@ function getData() {
 </script>
 ```
 This is the essence of how AJAX will interact with the ESP32 Webserver: 1) make a GET XMLHttpRequest of a specific name (readADC); 2) the Webserver
-will check what to do when a HTTP request with such name (readADC), in this case read an analog pin; 3) the webserver will send back some data;
+will check what to do when a HTTP request with such name (readADC) is received, in this case read an analog pin; 3) the webserver will send back some data;
 and 4) the Javascript code will process the response, for example by displaying the new value inside an span element with a specific id.
 
-The code at the server side is simple. First, need to define in the setup() what to do when a client request something like
-192.168.1.103/readADC. The code below specifies that the ESP32 will run the handle function *handleADC* if that happens.
+The code at the server side is simple. First, define in the setup() what to do when a client request something like
+192.168.1.103/readADC. The code below specifies that the ESP32 will run the handle function *handleADC()* if that happens.
 ```cpp
 server.on("/readADC", handleADC);
 ```
@@ -295,7 +295,7 @@ void handleADC() {
 **10. Sending many parameters using XML and AJAX**
 
 In the previous example only one value was sent in the XMLHttpRequest, but what if you need to send many? e.g. temperature, humidity, pressure, etc.
-Obviously, you can create separate functions, but if all data can be sent together it will be much more efficient as less requests would have
+Obviously, you can create separate functions, but if all data can be sent together at once it will be much more efficient, as less requests would have
 to be made. To send many values using AJAX, first they must be combined. There are two formats that can be used: [JSON](https://www.w3schools.com/js/js_json_intro.asp)
  and [XML](https://www.w3schools.com/xml/). An example of AJAX using JSON is found in https://circuits4you.com/2019/01/25/esp8266-dht11-humidity-temperature-data-logging/.
 The JSON object *data* includes the information from the analog pin, the temperature and humidity.
@@ -333,9 +333,8 @@ This function is called when
 server.on("/readParameters", handleParameters);
 ```
 and the HTTP request "/readParameters" occurs inside the javascript function *getParameters()* in the file PI_Control_Project_1.h, where the
-the HTML and Javascript code for the PI control website is located. Note that as this time the information sent is in XML format, it is used
-*this.responseXML*. Plus, the Tag names used here, e.g. 'Control_SetPoint', must be the same as in the XML code above.
-
+the HTML and Javascript code for the PI control website is located. Note that as the information sent is in XML format, it is used
+*this.responseXML* instead. Plus, the Tag names used here, e.g. 'Control_SetPoint', must be the same as in the XML code above.
 
 ```javascript
 	function getParameters() {
@@ -370,12 +369,12 @@ the HTML and Javascript code for the PI control website is located. Note that as
       XMLRequest.send();
     }
 ```
-Note that all the information sent as XML by the server is used in different elements of the webpage, all of them identified by an unique
+All the information sent as XML by the server is used in different elements of the webpage, all of them identified by an unique
 id, such as "sliderRange1", or "LedRED".
 
 **11. Input Elements and CSS - Range and Checkbox**
 
-In order to understand better the above code, you have to be familiar with [Range](https://www.w3schools.com/tags/att_input_type_range.asp)
+In order to understand better the above code, you have to be familiar with the input elements [Range](https://www.w3schools.com/tags/att_input_type_range.asp)
 and [Checkbox](https://www.w3schools.com/tags/att_input_type_checkbox.asp). An example of a range element is:
 
 ```html
@@ -384,8 +383,8 @@ and [Checkbox](https://www.w3schools.com/tags/att_input_type_checkbox.asp). An e
 <input type="range" min="0.005" max="0.1" step="0.005" id="myRange2" name="myRange2"  onchange="updateTextInput(this.value,'sliderRange2');">
 </div>
 ```
-Note this *onchange="updateTextInput(this.value,'sliderRange2')*. What this Javascript does is that when the slider is changed,
-the new value is shown in the label, which has an id of 'sliderRange2'. The code is quite simple:
+Note this part: *onchange="updateTextInput(this.value,'sliderRange2')*. What this Javascript does is that when the slider is changed,
+the new numeric value is shown in the label, which has an id of 'sliderRange2'. The code is quite simple:
 
 ```javascript
 <script>
@@ -394,8 +393,8 @@ function updateTextInput(val,NumRange) {
 </script>
 ```
 
-Note that both the label, using a span, and the range element have unique ids, "sliderRange2" and "myRange2" respectively, which were used
-in the previous Javascript code. An example of Checkboxes are these for the 3 LEDs, each with a different id.
+All the labels, using a span, and the range elements have unique ids, e.g. "sliderRange2" and "myRange2" respectively, which were used
+in the previous Javascript code. An example of input Checkboxes is the following for 3 LEDs, again each with a different id.
 
 ```html
 <label class="container">
@@ -410,9 +409,9 @@ in the previous Javascript code. An example of Checkboxes are these for the 3 LE
 <input type="checkbox" id="LedBLUE" name="LedBLUE" value="on">LED Blue
 <span class="checkmark"></span>
 ```
-Whereas the previous range element will show a default look, these checkboxes are much more stylish. This is accomplished by using
-CSS styles, in my case I used one from [here](https://www.w3schools.com/howto/howto_css_custom_checkbox.asp). Note that the checkbox
-is defined with a *class="container"*. Such class name is used to style the element using CSS notation. The CSS styles code is often
+Whereas the previous range element will be shown with a default look, these checkboxes are much more stylish. This is accomplished by using
+CSS styles, in my case I used one from [here](https://www.w3schools.com/howto/howto_css_custom_checkbox.asp). These checkbox
+are defined with a *class="container"*. Such class name is used to style the element using CSS notation. The CSS styles code is often
 given [inside the <head></head> tag of an HTML document](https://www.w3schools.com/tags/tag_style.asp). The CSS code looks like this:
 
 ```css
@@ -433,7 +432,7 @@ given [inside the <head></head> tag of an HTML document](https://www.w3schools.c
 etc etc
 ```
 If a nice, beautiful webside is desired, the style CSS section can be very long if you start copying styles from other sources.
-For example, the CSS code from this Toggle Switch (which is still a checkbox) comese from [here](https://www.w3schools.com/howto/howto_css_switch.asp).
+For example, the CSS code from the Toggle Switch to activate the control (which is still a checkbox) comes from [here](https://www.w3schools.com/howto/howto_css_switch.asp).
 
 ```html
 <label class="switch"> <input type="checkbox" name="ActivatePIControl"><span class="slider round"></span>
@@ -511,18 +510,19 @@ LedBlue = "off";
 ```
 
 **13. File system - LittleFS**
+
 All right! now you should be able to send information both ways, from the Webserver to a client and vice versa, always making
 use of the serial console to keep track. It is time to save some of that data, such at the DHT measurements, in a local file.
 The ESP32 has 4 Mb of Flash memory, used to save the code you upload every time, but there is extra space for other files.
 Before you can use such space to copy or write data, you must learn about the file systems in the ESP32. The most established one
-is called SPIFFS, and there are many tutorials about it. However, new much faster system called LittleFS with additional benefits,
+is called SPIFFS, and there are many tutorials about it. There is a new and faster system called LittleFS with additional benefits,
 yet there are not many examples out there. In many situations, LittleFS code is the same than for SPIFFS, and for this reason I 
 decided to use LittleFS.
 
 First, however, you need to add files and configure the Arduino IDE by following this tutorial https://www.mischianti.org/2021/04/01/esp32-integrated-littlefs-filesystem-5/.
 It is likely you need to copy an extra file called mklittlefs.exe as explained in the tutorial.
 
-The files to be sent to the ESP32 are saved locally inside you Arduino IDE project folder, inside a subfolder called *data*.
+The files to be sent to the ESP32 are saved locally inside your Arduino IDE project folder, inside a subfolder called *data*.
 When it is all done, you will see a new menu under Tools, called ESP32 Sketch Data Upload, which you can use to format the file system
 (first time is used) and to upload the files inside the folder *data*. Then, in order to use LittleFS with your code, you will
 need to install the relevant library, as explained in the tutorial above.
@@ -564,7 +564,7 @@ void readFile(const char * path){
     file.close();
 }
 ```
-The funtion *listAllFiles()* is used in the setup(), just to show in the serial console the files saves in the Flash memory, such as:
+The funtion *listAllFiles()* is used in the setup(), just to show in the serial console the files saved in the Flash memory.
 
 ```cpp
 //inside setup()
@@ -579,18 +579,19 @@ datafile.println("AAPL_time,AAPL_Temp,AAPL_Hum");
 datafile.close();
 readFile("/dataDHT.csv");
 ```
-Then, if there is an existing data file, called "dataDHT.csv", it will be removed when the ESP32 resets (otherwise the data will
-grow and grow...) using the commande *LITTLEFS.remove*. Next, a new empty file is created using the same name. Files can be open in two
-main ways: to read and to append(write). How to write (append) something into a file is done using *datafile.println*, like the command
+Then, if there is an existing file called "dataDHT.csv" it will be removed (every time ESP32 resets, otherwise the data will
+grow and grow...) using the commande *LITTLEFS.remove*. Next, a new empty file is created with the same name. Files can be open in two
+main ways: to read and to append (write). How to write (append) something into a file is done using *datafile.println*, like the command
 *Serial.println* you are using for debugging. The top line of the "dataDHT.csv" will be "AAPL_x,AAPL_Temp,AAPL_Hum" and it has to be
-written before we safe any DHT measurements. The reason is because this top row will act as headers and will be used when we plot
-this files, which column is what. In this case, the first column (AAPL_time) with be measurement time, the second value (AAPL_Temp) will be
+written before we save any DHT measurements. The reason is because this top row will act as headers and will be used when we plot
+this file; to specify which column is what. In this case, the first column (AAPL_time) with be the measurement time, the second value (AAPL_Temp) will be
 the temperature, and the third (AAPL_Hum) the humidity. We will have to follow this order when saving the data later on. The final code 
 line (*readFile("/dataDHT.csv");*) is just there to verify in the serial console that the newly created file looks good.
 
 
 **14. Data Logging in a CSV file**
-Next step is to store the relevant data in a file, in my case I used a classic comma separated value (CSV) format. The actual format
+
+Next step is to store the relevant data in a file; in my case I used a classic comma separated value (CSV) format. The actual format
 is of little relevance, meanwhile it is good for the desired subsequent processing. In this project, such file will be processed
 later on to make a nice plot, hence you shall make sure that your plotting app can use the format of the file. CSV seemed to me to be
 a safe format to use. The code to store the measurement time, and the temperature and humidity values from the DHT is the following:
@@ -616,7 +617,7 @@ void getDHTdata(){
   }
 }
 ```
-Simply call the *getDHTdata()* whenever you need to save need data in the file. Note, however, that a minimum interval of 1-2 s should
+Simply call the *getDHTdata()* whenever you need to save new readings in the file. Note, however, that a minimum interval of 1-2 s should
 be considered as measurements using a DHT are quite slow. To make sure that the data is appended correctly, use the previous
 call **readFile("/dataDHT.csv"*.
 
@@ -624,7 +625,7 @@ call **readFile("/dataDHT.csv"*.
 
 In the previous section you have created a file (at "/dataDHT.csv"), saved in the ESP32 Flash memory - but how to access it in the
 Webserver? If you try for example "192.168.1.103/dataDHT.csv" it will not work, it will say *Not found*. The reason is because
-we must specify in the ESP32 code what to do whenever we recieve a HTTP request such as that one. We must specify the handler, such as:
+we must specify in the ESP32 setup() what to do whenever we recieve a HTTP request such as that one, e.g.:
 
 ```cpp
 server.on("/dataDHT.csv", handledataDHT);
@@ -656,7 +657,7 @@ only one image was used, named "PIControlS.jpg", the code was: 1) the HTTP handl
 ```cpp
 server.on("/img", handleImg);
 ```
-and 2) the function ** inside WebHandlers.h will stream the data like before, but this time using *dataType = "image/jpeg"*.
+and 2) the function *handleImg()* inside WebHandlers.h will stream the data like before, but this time using *dataType = "image/jpeg"*.
 Note that the HTTP request ("/img") does not incorporate the name of the file we want to show, nor its expension (.jpg). It is not
 needed, yet you could certainly have used instead *server.on("/PIControlS.jpg", handleImg);*.
 
@@ -674,11 +675,11 @@ void handleImg() {
 }
 ```
 For a more general file server, where each individual file does not have to be specified like above, check http://myiot.co.uk/min_spiffs.html.
-If you type now in your browser "192.168.1.103/img" you shall see the "PIControlS.jpg" image displayed.
+If you type now in your browser "192.168.1.103/img", you shall see the "PIControlS.jpg" image displayed.
 
 **16. Displaying an image in the Webserver**
 
-Once an file, such an image, is accessible from the file system as shown in the previous section, it can be easily used inside
+Once a file, such an image, is accessible from the file system as shown in the previous section, it can be easily used inside
 your HTML files. In this project, the image "PIControlS.jpg" is displayed inside the two HTML pages we will create, which are stored
 in DHT_Project_1.h and in PI_Control_Project_1.h. An image is added into an HTML file using an [img tag](https://www.w3schools.com/tags/tag_img.asp),
 and in this case it is simply:
@@ -693,7 +694,7 @@ If you have used the ESPAsyncWebServer library to make an asynchronous Webserver
 **17. Plotting DHT data from a CSV file using Plotly Javascript**
 
 There are many [Javascript libraries](https://flatlogic.com/blog/best-19-javascript-charts-libraries/) that can be used for plotting data, 
-but I decided to use [Plotly with Javascript](https://plotly.com/javascript/). In addition to find out how such library work regarding
+but I decided to use [Plotly with Javascript](https://plotly.com/javascript/). In addition to find out how such library works regarding
 styles and so on, the two key tutorials to check are on how to read a CSV with an AJAX call https://plotly.com/javascript/ajax-call/,
 and how to stream data https://plotly.com/javascript/streaming/.
 
@@ -703,8 +704,8 @@ inserted in the web page, note its id="myDiv".
 ```cpp
 <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
 ```
-Then, the main Javascript code follows. *Plotly.d3.csv* loads our data file, and in the function *processData(allRows)*
-splits each data column - recall that we used in the first line of the file the headers AAPL_time, AAPL_Temp and AAPL_Hum.
+Then, the main Javascript code follows. *Plotly.d3.csv* loads our CSV data file, and in the function *processData(allRows)*
+splits each data column - recall that it was saved in the first line of the file the headers AAPL_time, AAPL_Temp and AAPL_Hum.
 The three vectors (x, Temp and Hum) are used to make the chart with the call * makePlotly( x, Temp, Hum )*. 
 ```javascript
   <script>
@@ -727,7 +728,7 @@ The three vectors (x, Temp and Hum) are used to make the chart with the call * m
 	}
 ```
 
-The key code to format the Plotly char is inside *makePlotly();*. Note that it is easy to understand what everything is doing.
+The key code to format the Plotly char is inside *makePlotly()*. It is easy to understand what everything is doing, mostly about formating, including a secondart y axis.
 
 ```javascript
 
@@ -801,7 +802,7 @@ The key code to format the Plotly char is inside *makePlotly();*. Note that it i
 	  Plotly.react('myDiv', data, layout);
 	};
 ```
-The final part of code needed it so specify how oftern you would like to refresh the plot, using the function *setInterval*, 
+The final part of code needed it so specify how oftern to refresh the plot, using the function *setInterval*, 
 in this case every 4 s (4000 ms).
 
 ```javascript
@@ -815,7 +816,7 @@ in this case every 4 s (4000 ms).
 
 At this point you should quite familiar using AJAX to communicate between the Webserver and the client. This section is certainly
 quite superficial, but it will cement how to do this properly. In the previous script, you should notice that there was a function
-*dataDHTSize()* called every 4 s. This Javascript function, as shown below, recieves XML data from the server including the 'SizeDataDHT' and
+*dataDHTSize()* called every 4 s. This Javascript function, as shown below, recieves XML data from the server: 'SizeDataDHT' and
 'SizeFlashFree'; which is then displayed in different parts of the text: e.g. look for *<span id="SizeDataDHT"></span>* in the
 DHT_Project_1.h file, and another one with an id="SizeFlashFree".
 
@@ -854,17 +855,18 @@ void handledataDHTSize(){
 }
 ```
 The global variables *SizeDataDHT* and *SizeFlashFree* are measured in the function *handledataDHT()* as shown in section 15. 
-They profide the currect file size of 
+They provide the currect size of data file, as well as the free memory left, both in bytes.
 
 **19. Sending an Email with an Attachment**
 
 An interesting, bur arguably superfluous, feature of the DHT webpage is the ability to send the "dataDHT.csv" file by email.
 Certainly, any real project should be able to send the recorded data somewhere for long term storage, analysis, etc. For example,
 you could send your data to Google Sheets https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/.
-As usual, there are different libraries to send emails with the ESP32 ([here](https://randomnerdtutorials.com/esp32-send-email-smtp-server-arduino-ide/)), however the only one I could manage to work with LittleFS
+As usual, there are different libraries to send emails with the ESP32 ([here](https://randomnerdtutorials.com/esp32-send-email-smtp-server-arduino-ide/)), 
+however the only one I could manage to work with LittleFS
 was the one from Renzo Mischianti called EMailSender  https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/ 
 (barely updated a few months ago to achieve LittleFS compatibility). This library works very easily when the Smtp information is from 
-Gmail.com, so much so that by default it will consider Gmail.com as the Smtp server to use. In this project, it only required
+Gmail.com; so much so that by default it will consider Gmail.com as the Smtp server to use. In this project, it only required
 to send my Gmail account Email and password.
 
 ```cpp
@@ -890,7 +892,7 @@ To make the webpage more interactive, the user has to fill up the name and email
 <div id="EmailResponse"></div>
 ```
 
-Once again, a JQuery snippet is used in order to send the information to the server, but do not change page, like for "my_form" in
+Once again, a JQuery snippet is used in order to send the information to the server, but to not change the page, like for "my_form" in
 PI_Control_Project_1.h. However, unlike in that form, when we process this email form we will expect to receive a reply from the 
 server - an it will be shown in between *<div id="EmailResponse"></div>*.
 
@@ -908,15 +910,15 @@ $("#my_form").submit(function(event){
 });
 </script>
 ```
-This form action relates to the HTTP request "/formulariDHT", which is address in the ESP32 setup() as:
+This form action relates to the HTTP request "/formulariDHT", which is handled in the ESP32 setup() as:
 
 ```cpp
 server.on("/formulariDHT", handleFormulariDHT);
 ```
-The handler function *handleFormulariDHT()* recieves the Recepient Name and Email, and send the email using the function
-*sendEmailDHT()*. In that function it will be defined the variable *EmailSuccsess*, and based on the value the server will
-send to the client a small sentence confirming if the email was sent or not. Note that such sentence (HTML code) will be shown
-inside *<div id="EmailResponse"></div>*. Realize that there is almost no validation of the email address.
+The handler function *handleFormulariDHT()* recieves the Recepient Name and Email, and sends the email using the function
+*sendEmailDHT()*. In that function it will be defined the variable *EmailSuccsess*, and based on its value the server will
+send to the client a small sentence confirming if the email was sent correctly or not. Such sentence (HTML code) will be shown
+inside *<div id="EmailResponse"></div>*. Unfortunatelly, there is almost no validation of the email address inserted.
 
 ```cpp
 void handleFormulariDHT(){
@@ -942,7 +944,7 @@ void handleFormulariDHT(){
 ```
 
 The workhorse function sending the Email is this one, where the Recipient name's is included in the HTML message.
-Note how the "dataDHT.csv" file is attached. The variable *EmailSuccsess*, from *resp.status*, is what is used to decide
+Note how the "dataDHT.csv" file is attached. The variable *EmailSuccsess*, from *resp.status*, is what is used to check
 if the email has been sent succesful or not.
 
 
@@ -967,15 +969,15 @@ void sendEmailDHT(){
 ```
 **20. Using a public API - OpenWeatherMap.org**
 
-The last part worth discussing of the Weather station webpage is how to use an public API, in this case from OpenWeatherMap.org.
+The last part worth discussing of the Weather station webpage is how to use a public API, in this case from OpenWeatherMap.org.
 There are several suitable tutorials to introduce API, how to register to that website, obtain the API Keys, and perform the
 HTTP Get requests: [here](https://randomnerdtutorials.com/esp32-http-get-open-weather-map-thingspeak-arduino/),
 [here](https://microcontrollerslab.com/http-get-esp32-arduino-openweathermap-thingspeak-examples/),
 and [here](https://techtutorialsx.com/2018/03/17/esp32-arduino-getting-weather-data-from-api/). However, such tutorials make use of the
-ESP32, which made it more cumbersome, and I really thought to be unnecessary - for the simple reason that the server, the ESP32,
-does not need to know the weather - only the client (browser) does. Hence, I decided to be more efficient to use directly Javascript
-on the client side, without anything to do about the ESP32. The tutorial I mostly followed is this one
-https://www.bithacker.dev/fetch-weather-openweathermap-api-javascript. The relevant code is this, using the same funny function name 
+ESP32, which makes it more cumbersome, and I really thought to be unnecessary - for the simple reason that the server, the ESP32,
+does not need to know the weather - only the client (browser) does. Hence, I decided to use directly Javascript
+on the client side only. The tutorial I mostly followed is this one
+https://www.bithacker.dev/fetch-weather-openweathermap-api-javascript. The relevant code is the following, using the same funny function name 
 * weatherBalloon( )* than in the example. The variable *key* must include the API key that you should recieve after registering
 to the website, at https://home.openweathermap.org/api_keys.
 
@@ -983,7 +985,7 @@ to the website, at https://home.openweathermap.org/api_keys.
   <script lang="text/javascript">
     // future javascript
 function weatherBalloon( ) {
-var key = 'b79***********************5';
+var key = '***********************';
 fetch('https://api.openweathermap.org/data/2.5/weather?q=Nur-sultan,Kz&units=metric&appid=' + key)  
 .then(function(resp) { return resp.json() }) // Convert data to json
 .then(function(data) {
@@ -1009,7 +1011,7 @@ dataDHTSize();
 }
 ```
 
-The data fetched from the API it is used embedded into the following text, where different colors are used to highlight the
+The data fetched from the API is embedded into the following text, where different colors are used to highlight the
 text that is automatically generated:
 
 ```html
@@ -1021,11 +1023,11 @@ This section concludes all about the DHT Weather Station. The remaining section 
 
 **21. Streaming data to a Plotly chart**
 
-Before focusing on how to do the PI control between the photoresistor and the 3 LEDs, it is convenient to plot all such data first.
-As such data should be processed and displayed much faster than in the previous DHT webpage, it requires a different approach. 
+Before focusing on how to do the PI control between the photoresistor and the 3 LEDs, it is convenient to continuously plot such data first.
+As the data should be processed and displayed much faster than in the previous DHT webpage, it requires a different approach. 
 Here, instead of loading a complete CSV file, only the newest data points will be sent and added to the existing graph - much faster.
-The function *getDataXML()* is used to get such data from the ESP32 using again AJAX. The outcome of such function is a new
-*updateData*, where the 5 values to plot are formatted in the way required by Plotly. Notice that the XML values are strings, and
+The function *getDataXML()* is used to get new data from the ESP32 using again AJAX. The outcome of such function is a new
+*updateData* variable, where the 5 new values to plot are formatted in the way required by Plotly. Notice that the XML values are strings, and
 thus have to be changed to numbers using *parseFloat*.
 
 ```cpp
@@ -1074,8 +1076,8 @@ void handleData() {
 }
 ```
 
-Once you are able to receive all new data, it is a matter to appending it to a Plotly chart. The following long Javascript is to 
-create an empty chart with 5 data groups: the real photoresistor value, the desired Set point, and the 3 LEds. Note the different
+Once you are able to receive all the new data, it is a matter to appending it to a Plotly chart. The following long Javascript is to 
+create an empty chart with 5 data groups: the photoresistor value, the desired Set point, and the 3 LEds. Note the different
 formatting involved, and realize that the plot will not have *x* data, for the simple reason that we are not doing time management in this
 example.
 
@@ -1180,8 +1182,8 @@ example.
 
 Once the plot is created, using *Plotly.newPlot*, it is easy to add new data using *Plotly.extendTraces*, the name of the chart,
 which in this case is 'graph' (find where it is defined: *<div id="graph"></div>*), as well as the new *y* values given in 
-*updateData*. The if loop at the end is to have a [moving axis](https://plotly.com/javascript/plotlyjs-function-reference/) if there are too many points.
-Finally, notice that the figure will be updated (refreshed) every 0.5 s, using *setInterval*.
+*updateData*. The *if* loop at the end is to have a [moving axis](https://plotly.com/javascript/plotlyjs-function-reference/) if there are too many points.
+Finally, the figure will be updated (refreshed) every 0.5 s, using *setInterval*.
 
 ```javascript
 	var interval = setInterval(function() {
@@ -1197,14 +1199,14 @@ Finally, notice that the figure will be updated (refreshed) every 0.5 s, using *
 **22. PI Control**
 
 If the previous section required plenty of coding on the client side (in the file PI_Control_Project_1.h which includes the HTML
-for the PI control web page), the PI control is done completely on the ESP32. The first thing to do, if you havent done already,
-is to familiarize yourself with PI control, the basics and the fundamentals - I suggest the following page from APmonitor.com
+for the PI control web page), the PI control is done completely on the ESP32. The first thing to do, if you havent done it already,
+is to familiarize yourself with the PI control, the basics and the fundamentals - I suggest the following page from APmonitor.com
 https://apmonitor.com/pdc/index.php/Main/ProportionalIntegralControl. In a typical control system, such as the [TCLab fom APmonitor](https://apmonitor.com/pdc/index.php/Main/ArduinoTemperatureControl)
 based on a heat source and a temperature sensor, there is a substantial time delay between switching on the actuator (e.g. heater),
-and achieving a steady state value of the process variable (e.g. temperature a bit far away from the heat source).
-Such delays are very important in control. However, in the setup used here using a photoresistor and LEDs, such delay is very short
-and due to the electronics itself. For this reason, in order to avoid an extremely fast control impossible to visualize in a chart,
-and artificial time delay was implemented, termed *ControlMillisInterval* and defined at 500 ms.
+and achieving a steady state value of the process variable (e.g. the sensor temperature).
+Such delays are very important in control. However, in the setup used here using a photoresistor and LEDs, such delay is very short,
+due to the electronics itself - not because of the time for the light to travel. For this reason, in order to avoid an extremely fast control impossible to visualize in a chart,
+and artificial time delay was implemented, termed *ControlMillisInterval*, and defined at 500 ms.
 
 ```cpp
 currentMillis = millis();
@@ -1213,6 +1215,7 @@ if (currentMillis - PrevControlMillis > ControlMillisInterval){
 ```
 Next, there is an if statement to check if the control should be active or no, based on the toggle switch checkbox discussed in section 11.
 Remember that the value of the variable *Control_Active* is sent from the client using AJAX.
+
 ```cpp
 PhotoResValue = analogRead(PhotoResPin);
 if (Control_Active =="on"){
@@ -1249,7 +1252,7 @@ be 8 bit (check tutorials in section 5), then the maximum value possible for the
 ```
 
 The new control value is copied to *LEDValue*, which has be sent to the LEDs. As in this project you could use any combination
-of red, green and blue LEDs, the following if statements are needed to lighten up each LED correctly.
+of red, green and blue LEDs, the following *if* statements are needed to lighten up each LED correctly.
 
 ```cpp
 if (LedRed=="on"){
@@ -1300,10 +1303,10 @@ else {    //if acutator is off, switch off LEDs
 
 **23. Multitasking with the ESP32 Dual Core**
 
-One of the very interesting things of the ESP32 is that it has two cores, hence you can split the workload for speed.
-In this project, however, there is nothing computationally intensive that needs parallel computing. However, there are two
+One of the very interesting things of the ESP32 is that it has two cores, hence you could split the workload for speed.
+In this project, however, there is nothing computationally intensive that needs parallel computing. Nevertheless, there are two
 very clear functionalities: a) the above PI control and DHT data logging; and b) everything to do with the Webserver.
-The way the project is designed, the clients (browsers with webpages open) will send many requests to the server to update
+The way this project is designed, the clients (browsers with webpages open) will send many requests to the server to update
 data and the figures. If there are too many requests, certainly the server can be slowed down. Hence, by separating web applications
 from the 'serious' ones of control and logging - by using different cores, we should minimize (in principle) any disruption to 
 control and sensor measurement and recording. Follow this tutorial and add all the 'serious' code into the Core 0, which normally it
@@ -1319,18 +1322,18 @@ void loop() {
 
 **24. Final touches - MathJax and CSS Buttons**
 
-Once the web pages works as intended, it is a matter formatting it to look as good as desired, for instance by making sure that
-the web page will be dispayed correctly in a computer and in a mobile phone by using this simple code:
+Once the web pages works as intended, it is a matter formatting them to look as good as desired, for instance by making sure that
+they are dispayed correctly in a computer and in a mobile phone by using this simple code:
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 ```
 
-In my case, I wanted to add the PI control equations in the web page, and I wanted to look nice. For this, I used another Javascript
+In addition, I wanted to add the PI control equations in the web page, and I wanted them to look nice. For this, I used another Javascript
 library called [MathJax](https://www.mathjax.org/). Whereas there are other ways to incorporate equations into a web page, like
-[MathML](https://www.w3.org/Math/), I found it extremely cumbersome and tedious instead of the much more elegant TeX language that
-MathJax uses. In order to show math equations inside a normal paragraph with other text, instead of being a separate equation by
-itself, you should add the following code at the [web page head](https://docs.mathjax.org/en/latest/web/configuration.html):
+[MathML](https://www.w3.org/Math/), I found it extremely cumbersome and tedious, unlike of the much more elegant TeX language that
+MathJax uses. In order to show math equations inside a normal paragraph with other text, you should add the following code at the
+ [web page head](https://docs.mathjax.org/en/latest/web/configuration.html):
 
 ```javascript
 <script>
@@ -1339,8 +1342,8 @@ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
 </script>
 ```
-this code is used to specify that MathJax should format into equations whatever is between $ $. But if you want an aquation to stand alone,
-the write the TeX code between two $$ $$. For example, the first PI control equation in TeX format is:
+This code is used to specify that MathJax should format into equations whatever is between $ $. But if you want an equation to stand alone by itself,
+then write the TeX code between two $$ $$. For example, the first PI control equation in TeX format is:
 
 $$Led(t)=Led_{bias}+ K_P(P_{SP} - P_{PV})+ \frac{K_P}{\tau _I} \int_{0}^{t}{(P_{SP} - P_{PV})dt} $$
 
