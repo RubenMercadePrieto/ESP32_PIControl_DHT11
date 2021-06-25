@@ -25,6 +25,32 @@ called [GOOUUU](https://world.taobao.com/item/547075951035.htm). The only releva
 The following is a step-by-step guide using online tutorials that I more or less followed in the development of this project. Note that many items could be done in different order.
 
 [1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor](#1-learn-how-to-use-Arduino-to-monitor-a-photoresistor-modulate-LED-and-read-the-DHT11-sensor)
+[2. Install the ESP32 into the Arduino IDE](#2-install-the-esp32-into-the-arduino-ide)
+[3. Connect the ESP32 to your local Wifi network](#3-connect-the-esp32-to-your-local-wifi-network)
+[4. Read photoresistor analog signal](#4-read-photoresistor-analog-signal)
+[5. DHT sensor readings](#5-dnt-sensor-readings)
+[6. Get time from a NTP server](#6-get-time-from-a-ntp-server)
+[7. ESP32 Webserver](#7-esp32-webserver)
+[8. ESP32 Webserver controlling LEDs](#8-espP32-webserver-controlling-leds)
+[9. Asynchronous communication between the Webserver and a Client](#9-asynchronous-communication-between-the-webserver-and-a-client)
+[10. Sending many parameters using XML and AJAX](#10-sending-many-parameters-using-xml-and-ajax)
+[11. Input Elements and CSS - Range and Checkbox](#11-input-elements-and-css-range-and-checkbox)
+[12. Forms](#12-forms)
+[13. File system - LittleFS](#13-file-system-littlefs)
+[14. Data Logging in a CSV file](#14-data-logging-in-a-csv-file)
+[15. Streaming files in the Webserver](#15-streaming-files-in-the-webserver)
+[16. Displaying an image in the Webserver](#16-displaying-an-image-in-the-webserver)
+[17. Plotting DHT data from a CSV file using Plotly Javascript](#17-plotting-dht-data-from-a-csv-file-using-plotly-javascript)
+[18. AJAX, XML and Files](#18-ajax-xml-and-files)
+[19. Sending an Email with an Attachment](#19-sending-an-email-with-an-attachment)
+[20. Using a public API - OpenWeatherMap.org](#20-using-a-public-api-openweathermaporg)
+[21. Streaming data to a Plotly chart](#21-streaming-data-to-a-plotly-chart)
+[22. PI Control](#22-pi-control)
+[23. Multitasking with the ESP32 Dual Core](#23-multitasking-with-the-esp32-dual-core)
+[24. Final touches - MathJax and CSS Buttons](#24-final-touches-mathjax-and-css-buttons)
+[25. Making the ESP32 available from the Internet](#25-making-the-esp32-available-from-the-internet)
+
+
 
 # 1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor.
 
