@@ -24,9 +24,9 @@ called [GOOUUU](https://world.taobao.com/item/547075951035.htm). The only releva
 
 The following is a step-by-step guide using online tutorials that I more or less followed in the development of this project. Note that many items could be done in different order.
 
-[1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor](#1-learn-how-to-use-Arduino-to-monitor-a-photoresistor-modulate-LED-and-read-the-DHT11-sensor)
+[1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor](###1-learn-how-to-use-Arduino-to-monitor-a-photoresistor-modulate-LED-and-read-the-DHT11-sensor)
 
-# 1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor.
+### 1. Learn how to use Arduino to monitor a photoresistor, modulate LED, and read the DHT11 sensor.
 
 Before moving to the ESP32, it is good that you know how to work with the little hardware needed for this project, the following should be suitable online tutorials:
 * How to read the analog response of the photoresistor https://www.arduino.cc/en/Tutorial/BuiltInExamples/AnalogInput.
