@@ -1385,3 +1385,18 @@ The CSS code of the class="corner-button" is all saved in the syle tag at the we
 
 etc etc
 ```
+
+**25. Making you ESP32 available from the Internet**
+
+You should have noticed that you can only access your ESP32 webserver from inside your network, e.g. 192.168.1.***. 
+Unless you do it the proper way and get a dedicated public IP address, you will need to find a way to redirect a public URL to your local ESP32 IP address.
+It should be possible to use Dynamic DNS (for example [here](https://www.instructables.com/ESP8266-Automation-With-Web-Interface-and-DDNS/)
+or [here](https://www.open-electronics.org/arduino-ddns-dynamic-dns/), usin a typical provider like noip.com, but I did not succeeded with my local network...
+A second option is to use ngrok, which requires to install a little program in you computer, to register at ngrok.com and get an Authtoken, and then execute
+the installed program mentioning the local IP of the ESP32 as well as the given Authtoken. There is a full tutorial here
+https://microcontrollerslab.com/accessing-esp32-web-server-anywhere-world-esp8266/. You will get a public URL like http://0.tcp.ngrok.io:11161/ which can
+be accessed from anywhere. ngrok is
+ok for testing your project throught the internet, not for long term use, as you will need your computer switch on with ngrok running in order for the
+redirection to work.
+
+
