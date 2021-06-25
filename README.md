@@ -48,7 +48,7 @@ The following is a step-by-step guide using online tutorials that I more or less
 
 [12. Forms](#12-forms)
 
-[13. File system - LittleFS](#13-file--system-littlefs)
+[13. File system LittleFS](#13-file-system-littlefs)
 
 [14. Data Logging in a CSV file](#14-data-logging-in-a-csv-file)
 
@@ -62,7 +62,7 @@ The following is a step-by-step guide using online tutorials that I more or less
 
 [19. Sending an Email with an Attachment](#19-sending-an-email-with-an-attachment)
 
-[20. Using a public API - OpenWeatherMap.org](#20-using-a-public-api--openweathermaporg)
+[20. Using a public API OpenWeatherMap.org](#20-using-a-public-api-openweathermaporg)
 
 [21. Streaming data to a Plotly chart](#21-streaming-data-to-a-plotly-chart)
 
@@ -70,7 +70,7 @@ The following is a step-by-step guide using online tutorials that I more or less
 
 [23. Multitasking with the ESP32 Dual Core](#23-multitasking-with-the-esp32-dual-core)
 
-[24. Final touches - MathJax and CSS Buttons](#24-final-touches--mathjax-and-css-buttons)
+[24. Final touches with MathJax and CSS Buttons](#24-final-touches-with-mathjax-and-css-buttons)
 
 [25. Making the ESP32 available from the Internet](#25-making-the-esp32-available-from-the-internet)
 
@@ -561,7 +561,7 @@ LedBlue = "off";
 }
 ```
 
-# 13. File system - LittleFS
+# 13. File system LittleFS
 
 All right! now you should be able to send information both ways, from the Webserver to a client and vice versa, always making
 use of the serial console to keep track. It is time to save some of that data, such at the DHT measurements, in a local file.
@@ -1019,7 +1019,7 @@ void sendEmailDHT(){
     EmailSuccsess = resp.status;
 }
 ```
-# 20. Using a public API - OpenWeatherMap.org
+# 20. Using a public API OpenWeatherMap.org
 
 The last part worth discussing of the Weather station webpage is how to use a public API, in this case from OpenWeatherMap.org.
 There are several suitable tutorials to introduce API, how to register to that website, obtain the API Keys, and perform the
@@ -1372,7 +1372,7 @@ void loop() {
 }
 ```
 
-# 24. Final touches - MathJax and CSS Buttons
+# 24. Final touches with MathJax and CSS Buttons
 
 Once the web pages works as intended, it is a matter formatting them to look as good as desired, for instance by making sure that
 they are dispayed correctly in a computer and in a mobile phone by using this simple code:
