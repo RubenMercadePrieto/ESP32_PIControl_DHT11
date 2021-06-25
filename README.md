@@ -34,7 +34,7 @@ Before moving to the ESP32, it is good that you know how to work with the little
 * Use the DHT temperature and humidity sensor using a suitable library, that would have be installed. Note that the DHT readings are digital, unlike those of the photoresistor,
 and that they require 1-2 s, hence do not use short intervals. https://create.arduino.cc/projecthub/pibots555/how-to-connect-dht11-sensor-with-arduino-uno-f4d239.
 
-**2. Install the ESP32 into the Arduino IDE.**
+# 2. Install the ESP32 into the Arduino IDE.
 
 If it is the first time you use the ESP32, first you will have to decide how you will program it, as there are indeed quite a few ways to do it: from the official 
 Espressif IoT Development Framework (ESP-IDF), to MicroPython, or using the Arduino IDE with is based on C++. In this project I used the latter, as it is the easyest
@@ -42,7 +42,7 @@ for Arduino users.
 Find a suitable tutorial on how to install the ESP32 into the Arduino IDE, such as https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/.
 When all is done, you should likely select the "ESP32 Dev Module" as you board.
 
-**3. Connect the ESP32 to your local Wifi network.**
+# 3. Connect the ESP32 to your local Wifi network.
 
 Despite you will communicate with the ESP32 using the USB serial, like in the Arduino, as it is the easiest way (but not the only! check Arduino OTA), the wireless
 capabilities of the ESP32 should be used right away. Hence, connect to your Wifi network following examples in the IDE or e.g. https://www.megunolink.com/articles/wireless/how-do-i-connect-to-a-wireless-network-with-the-esp32/.
@@ -61,7 +61,7 @@ Later on, we will also use this file to save your email access credentials. Fina
 ```
 You will need many more libraries along the way.
 
-**4. Read photoresistor analog signal.**
+# 4. Read photoresistor analog signal.
 
 Before going in depth with Wifi and so on, recreate the basic hardware setup you did with Arduino but now with the ESP32. As the signal of the photoresistor
 is analogic, it will have to be further processed in one of the two ADC converters the ESP32 has, with 12 bit resolution. Note importantly, that the ADC2 of the
@@ -78,7 +78,7 @@ int greenpin = 14 ;// select the pin for the green LED
 ```
 Additional PWM parameters have to be defined in the ESP32, unlike with Arduino, as explained here https://randomnerdtutorials.com/esp32-pwm-arduino-ide/.
 
-**5. DHT sensor readings.**
+# 5. DHT sensor readings.
 
 Like for Arduino, the key issue is to find a suitable library. I used [DHTesp](https://github.com/beegee-tokyo/DHTesp), as in this example https://circuits4you.com/2019/01/25/esp32-dht11-22-humidity-temperature-sensor-interfacing-example/,
  but you can find other examples
@@ -100,7 +100,7 @@ Serial.println(" T:" + String(newValues.temperature) + " H:" + String(newValues.
 
 ```
 
-**6. Get time from a NTP server**
+# 6. Get time from a NTP server
 
 In section 5, you should achieve readings from the DHT sensor every several seconds, to be displayed in the serial console.
 Improve that by adding the time that such measurements were taken. To do that, a simple way is to connect to a
@@ -134,7 +134,7 @@ void printLocalTime()
 ```
 Note the different ways to format time according to your needs using the [strftime](https://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html) standard method. 
 
-**7. ESP32 Webserver**
+# 7. ESP32 Webserver
 
 By now you should be able to do the same things than in step 1 with the Arduino, but using the ESP32 instead, particularly using the serial console
 to make sure all is working well. The idea would be to show such measurements and control some simple LEDs, not by using the
@@ -195,7 +195,7 @@ void loop(void) {
 }
 ```
 
-**8. ESP32 Webserver controlling LEDs**
+# 8. ESP32 Webserver controlling LEDs
 
 The previous example is a bit silly, so it is time to do something more interesting with the Webserver, such as controlling some LEDs.
 This will be a core issue of this project, how the client (browser) and the server (ESP32) communicate in different directions. Follow this
@@ -208,7 +208,7 @@ First, it is ugly, as everybody can see in their browser whatever is going on, a
 
 These initial examples should be used to learn the basics of [HTML coding](https://www.w3schools.com/html/), and a little bit on [CSS styles](https://www.w3schools.com/css/default.asp).
 
-**9. Asynchronous communication between the Webserver and a Client**
+# 9. Asynchronous communication between the Webserver and a Client
 
 In order to be able to transfer information easily between the server and a client, without having the reload the web page, an asynchronous
 system should be used. Many tutorials on the topic, e.g. [here](https://randomnerdtutorials.com/esp32-web-server-slider-pwm/) and 
@@ -294,7 +294,7 @@ void handleADC() {
 }
 ```
 
-**10. Sending many parameters using XML and AJAX**
+# 10. Sending many parameters using XML and AJAX
 
 In the previous example only one value was sent in the XMLHttpRequest, but what if you need to send many? e.g. temperature, humidity, pressure, etc.
 Obviously, you can create separate functions, but if all data can be sent together at once it will be much more efficient, as less requests would have
@@ -374,7 +374,7 @@ the HTML and Javascript code for the PI control website is located. Note that as
 All the information sent as XML by the server is used in different elements of the webpage, all of them identified by an unique
 id, such as "sliderRange1", or "LedRED".
 
-**11. Input Elements and CSS - Range and Checkbox**
+# 11. Input Elements and CSS - Range and Checkbox
 
 In order to understand better the above code, you have to be familiar with the input elements [Range](https://www.w3schools.com/tags/att_input_type_range.asp)
 and [Checkbox](https://www.w3schools.com/tags/att_input_type_checkbox.asp). An example of a range element is:
@@ -440,7 +440,7 @@ For example, the CSS code from the Toggle Switch to activate the control (which 
 <label class="switch"> <input type="checkbox" name="ActivatePIControl"><span class="slider round"></span>
 ```
 
-**12. Forms**
+# 12. Forms
 
 By now, you should be able to send DHT data and other information from the Webserver to a web page using AJAX. What about if we have
 to send some input parameters from the web page to the server. The classic approach is using [forms](https://www.w3schools.com/html/html_forms.asp). 
@@ -511,7 +511,7 @@ LedBlue = "off";
 }
 ```
 
-**13. File system - LittleFS**
+# 13. File system - LittleFS
 
 All right! now you should be able to send information both ways, from the Webserver to a client and vice versa, always making
 use of the serial console to keep track. It is time to save some of that data, such at the DHT measurements, in a local file.
@@ -591,7 +591,7 @@ the temperature, and the third (AAPL_Hum) the humidity. We will have to follow t
 line (*readFile("/dataDHT.csv");*) is just there to verify in the serial console that the newly created file looks good.
 
 
-**14. Data Logging in a CSV file**
+# 14. Data Logging in a CSV file
 
 Next step is to store the relevant data in a file; in my case I used a classic comma separated value (CSV) format. The actual format
 is of little relevance, meanwhile it is good for the desired subsequent processing. In this project, such file will be processed
@@ -623,7 +623,7 @@ Simply call the *getDHTdata()* whenever you need to save new readings in the fil
 be considered as measurements using a DHT are quite slow. To make sure that the data is appended correctly, use the previous
 call **readFile("/dataDHT.csv"*.
 
-**15. Streaming files in the Webserver**
+# 15. Streaming files in the Webserver
 
 In the previous section you have created a file (at "/dataDHT.csv"), saved in the ESP32 Flash memory - but how to access it in the
 Webserver? If you try for example "192.168.1.103/dataDHT.csv" it will not work, it will say *Not found*. The reason is because
@@ -679,7 +679,7 @@ void handleImg() {
 For a more general file server, where each individual file does not have to be specified like above, check http://myiot.co.uk/min_spiffs.html.
 If you type now in your browser "192.168.1.103/img", you shall see the "PIControlS.jpg" image displayed.
 
-**16. Displaying an image in the Webserver**
+# 16. Displaying an image in the Webserver
 
 Once a file, such an image, is accessible from the file system as shown in the previous section, it can be easily used inside
 your HTML files. In this project, the image "PIControlS.jpg" is displayed inside the two HTML pages we will create, which are stored
@@ -693,7 +693,7 @@ If you have used the ESPAsyncWebServer library to make an asynchronous Webserver
 [here](https://randomnerdtutorials.com/display-images-esp32-esp8266-web-server/) or 
 [here](https://techtutorialsx.com/2018/08/24/esp32-http-web-server-serving-image-from-file-system/).
 
-**17. Plotting DHT data from a CSV file using Plotly Javascript**
+# 17. Plotting DHT data from a CSV file using Plotly Javascript
 
 There are many [Javascript libraries](https://flatlogic.com/blog/best-19-javascript-charts-libraries/) that can be used for plotting data, 
 but I decided to use [Plotly with Javascript](https://plotly.com/javascript/). In addition to find out how such library works regarding
@@ -814,7 +814,7 @@ in this case every 4 s (4000 ms).
 	}, 4000);
 ```
 
-**18. AJAX, XML and Files**
+# 18. AJAX, XML and Files
 
 At this point you should quite familiar using AJAX to communicate between the Webserver and the client. This section is certainly
 quite superficial, but it will cement how to do this properly. In the previous script, you should notice that there was a function
@@ -859,7 +859,7 @@ void handledataDHTSize(){
 The global variables *SizeDataDHT* and *SizeFlashFree* are measured in the function *handledataDHT()* as shown in section 15. 
 They provide the currect size of data file, as well as the free memory left, both in bytes.
 
-**19. Sending an Email with an Attachment**
+# 19. Sending an Email with an Attachment
 
 An interesting, bur arguably superfluous, feature of the DHT webpage is the ability to send the "dataDHT.csv" file by email.
 Certainly, any real project should be able to send the recorded data somewhere for long term storage, analysis, etc. For example,
@@ -969,7 +969,7 @@ void sendEmailDHT(){
     EmailSuccsess = resp.status;
 }
 ```
-**20. Using a public API - OpenWeatherMap.org**
+# 20. Using a public API - OpenWeatherMap.org
 
 The last part worth discussing of the Weather station webpage is how to use a public API, in this case from OpenWeatherMap.org.
 There are several suitable tutorials to introduce API, how to register to that website, obtain the API Keys, and perform the
@@ -1023,7 +1023,7 @@ and a humidity of <font color=red><span id="Humidity"></span></font> ...
 ```
 This section concludes all about the DHT Weather Station. The remaining section will focus on the PI control webpage.
 
-**21. Streaming data to a Plotly chart**
+# 21. Streaming data to a Plotly chart
 
 Before focusing on how to do the PI control between the photoresistor and the 3 LEDs, it is convenient to continuously plot such data first.
 As the data should be processed and displayed much faster than in the previous DHT webpage, it requires a different approach. 
@@ -1198,7 +1198,7 @@ Finally, the figure will be updated (refreshed) every 0.5 s, using *setInterval*
 	}, 500);
 ```
 
-**22. PI Control**
+# 22. PI Control
 
 If the previous section required plenty of coding on the client side (in the file PI_Control_Project_1.h which includes the HTML
 for the PI control web page), the PI control is done completely on the ESP32. The first thing to do, if you havent done it already,
@@ -1303,7 +1303,7 @@ else {    //if acutator is off, switch off LEDs
 }
 ```
 
-**23. Multitasking with the ESP32 Dual Core**
+# 23. Multitasking with the ESP32 Dual Core
 
 One of the very interesting things of the ESP32 is that it has two cores, hence you could split the workload for speed.
 In this project, however, there is nothing computationally intensive that needs parallel computing. Nevertheless, there are two
@@ -1322,7 +1322,7 @@ void loop() {
 }
 ```
 
-**24. Final touches - MathJax and CSS Buttons**
+# 24. Final touches - MathJax and CSS Buttons
 
 Once the web pages works as intended, it is a matter formatting them to look as good as desired, for instance by making sure that
 they are dispayed correctly in a computer and in a mobile phone by using this simple code:
@@ -1388,7 +1388,7 @@ The CSS code of the class="corner-button" is all saved in the syle tag at the we
 etc etc
 ```
 
-**25. Making the ESP32 available from the Internet**
+# 25. Making the ESP32 available from the Internet
 
 You should have noticed that you can only access your ESP32 webserver from inside your network, e.g. 192.168.1.***. 
 Unless you do it the proper way and get a dedicated public IP address, you will need to find a way to redirect a public URL to your local ESP32 IP address.
